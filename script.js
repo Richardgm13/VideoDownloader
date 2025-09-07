@@ -1,8 +1,13 @@
 // DOM 元素
-const passwordModal = document.getElementById('passwordModal');
-const passwordInput = document.getElementById('passwordInput');
-const submitPassword = document.getElementById('submitPassword');
-const passwordError = document.getElementById('passwordError');
+// 密码相关元素 (已注释掉密码验证功能)
+// const passwordModal = document.getElementById('passwordModal');
+// const passwordInput = document.getElementById('passwordInput');
+// const submitPassword = document.getElementById('submitPassword');
+// const passwordError = document.getElementById('passwordError');
+
+// 添加本地解析按钮元素
+const localParseButton = document.getElementById('localParseButton');
+const videoUrl = document.getElementById('videoUrl');
 const mainContainer = document.getElementById('mainContainer');
 const videoLink = document.getElementById('videoLink');
 const pasteButton = document.getElementById('pasteButton');
@@ -20,7 +25,8 @@ const retryButton = document.getElementById('retryButton');
 // 当前解析结果缓存
 let currentResult = null;
 
-// 密码验证
+/*
+// 密码验证 (已注释掉)
 submitPassword.addEventListener('click', () => {
     const password = passwordInput.value.trim();
     if (password === '123456') {
@@ -37,12 +43,51 @@ submitPassword.addEventListener('click', () => {
     }
 });
 
-// 密码输入框回车事件
+// 密码输入框回车事件 (已注释掉)
 passwordInput.addEventListener('keyup', (e) => {
     if (e.key === 'Enter') {
         submitPassword.click();
     }
 });
+*/
+
+// 本地解析按钮点击事件
+localParseButton.addEventListener('click', () => {
+    localParseVideoLink();
+});
+
+// 本地解析函数 - 不调用API，直接解析字符串
+function localParseVideoLink() {
+    const text = videoLink.value.trim();
+    if (!text) {
+        alert('请输入视频链接');
+        return;
+    }
+
+    // 显示结果区域
+    resultSection.classList.remove('hidden');
+    resultSection.classList.add('fade-in');
+    loadingState.classList.add('hidden');
+    errorState.classList.add('hidden');
+
+    // 简单的本地解析逻辑
+    // 从输入文本中提取信息
+    const url = extractUrlFromText(text);
+    
+    // 设置默认的视频标题和地址
+    const title = text.length > 50 ? text.substring(0, 50) + '...' : text;
+    
+    // 更新UI
+    videoTitle.textContent = title;
+    videoUrl.textContent = url || text;
+    
+    // 设置当前结果缓存
+    currentResult = {
+        title: title,
+        url: url || text,
+        cover: '' // 本地解析不提供封面
+    };
+}
 
 // 粘贴按钮功能
 pasteButton.addEventListener('click', async () => {
@@ -151,6 +196,7 @@ function handleApiResponse(data) {
 
         // 显示结果
         videoTitle.textContent = currentResult.title || '无标题';
+        videoUrl.textContent = currentResult.url || ''; // 显示视频地址
         coverImage.src = currentResult.cover || '';
         coverImage.alt = currentResult.title || '视频封面';
 

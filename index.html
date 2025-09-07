@@ -39,8 +39,8 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-light to-gray-100 min-h-screen font-inter">
-    <!-- 密码验证模态框 -->
-    <div id="passwordModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <!-- 密码验证模态框 (已注释掉) -->
+    <!-- <div id="passwordModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
         <div class="bg-white rounded-xl p-8 shadow-xl max-w-md w-full mx-4 transform transition-all">
             <h2 class="text-2xl font-bold text-center mb-6 text-dark">请输入访问密码</h2>
             <div class="space-y-4">
@@ -53,10 +53,10 @@
                 <p id="passwordError" class="text-red-500 text-center hidden">密码错误，请重试</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- 主容器 -->
-    <div id="mainContainer" class="container mx-auto px-4 py-12 max-w-4xl hidden">
+    <div id="mainContainer" class="container mx-auto px-4 py-12 max-w-4xl">
         <!-- 标题部分 -->
         <header class="text-center mb-12">
             <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-dark mb-4">视频去水印下载</h1>
@@ -87,16 +87,22 @@
                             <i class="fa fa-check-circle mr-1"></i> 西瓜视频
                         </span>
                     </div>
-                    <button id="parseButton" 
-                            class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-custom flex items-center">
-                        <i class="fa fa-magic mr-2"></i> 开始解析
-                    </button>
+                    <div class="flex space-x-3">
+                        <button id="parseButton" 
+                                class="bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-custom flex items-center">
+                            <i class="fa fa-magic mr-2"></i> API解析
+                        </button>
+                        <button id="localParseButton" 
+                                class="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-custom flex items-center">
+                            <i class="fa fa-code mr-2"></i> 本地解析
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 结果展示区域 -->
-        <section id="resultSection" class="hidden bg-white rounded-2xl shadow-custom p-6 transition-custom">
+        <section id="resultSection" class="bg-white rounded-2xl shadow-custom p-6 transition-custom">
             <h2 class="text-xl font-bold text-dark mb-6 flex items-center">
                 <i class="fa fa-check-circle text-green-500 mr-2"></i> 解析结果
             </h2>
@@ -105,7 +111,8 @@
             <div class="mb-8">
                 <h3 class="text-lg font-semibold text-gray-700 mb-3">视频信息</h3>
                 <div class="space-y-2">
-                    <p><strong>标题：</strong><span id="videoTitle" class="text-gray-600 break-all"></span></p>
+                    <p><strong>视频标题：</strong><span id="videoTitle" class="text-gray-600 break-all"></span></p>
+                    <p><strong>视频地址：</strong><span id="videoUrl" class="text-gray-600 break-all"></span></p>
                 </div>
             </div>
 
