@@ -115,65 +115,30 @@ function parseVideoLink() {
 
 // 调用API获取视频数据
 function fetchVideoData(url) {
-    // API地址（注意：实际使用时需要替换为有效的API密钥）
-    const apiKey = '30d2b81633c8448eb19b02f2f8dfdfce'; // 用户需要替换为实际的API密钥
+    // API地址（已设置为真实的API密钥）
+    const apiKey = '30d2b81633c8448eb19b02f2f8dfdfce';
     const apiUrl = `https://api.guijianpan.com/waterRemoveDetail/xxmQsyByAk?ak=${apiKey}&link=${encodeURIComponent(url)}`;
 
     // 注意：由于浏览器的CORS限制，实际环境中可能需要设置代理
-    // 这里使用模拟数据来展示功能
     console.log('调用API:', apiUrl);
 
-    // 模拟API请求延迟
-    setTimeout(() => {
-        // 模拟API返回数据（基于用户提供的示例）
-        const mockResponse = {
-            "accessToken": "",
-            "code": "10000",
-            "msg": "成功!",
-            "content": {
-                "author": "",
-                "avatar": "",
-                "cover": "https://p26-sign.douyinpic.com/tos-cn-p-0015c000-ce/o8UTSAHbv4KjhggioEv4TFAeefM1ZwQH2sYeD7~tplv-dy-resize-walign-adapt-aq:720:q75.webp?lk3s=138a59ce&x-expires=1756515600&x-signature=%2FhPB1b95JwIWcplIBp%2BUI4E1yAw%3D&from=327834062&s=PackSourceEnum_AWEME_DETAIL&se=false&sc=cover&biz_tag=aweme_video&l=20250816093602CF8E8B9092420311F682",
-                "coverList": [],
-                "headUrl": "",
-                "imageList": [],
-                "likeNum": 0,
-                "msg": "",
-                "originText": "https://v.douyin.com/ZOqdo9qsYuY",
-                "shortUrl": "https://v.douyin.com/ZOqdo9qsYuY",
-                "shuiYinPlatform": null,
-                "success": true,
-                "title": "随意\"搭讪\"韩国美女，印度富人区的三哥能有多自信？ #外国人 #歪果仁真会玩 #印度 #旅行 #看世界",
-                "type": "VIDEO",
-                "url": "https://v9-default.365yg.com/2e3a0ce3b41372f7fe68bd18b4143c7e/689fef86/video/tos/cn/tos-cn-ve-15c000-ce/oIR085Eh9CfIXAL7fJRE1wVRdCBIgreuksvGIs/?a=2011&ch=0&cr=0&dr=0&cd=0%7C0%7C0%7C0&cv=1&br=3144&bt=3144&cs=0&ds=3&ft=aT_7TQQqUYqfJEZPo0OW_QYaUqiXXtqmRVJEjUJEpvPD-Ipz&mime_type=video_mp4&qs=0&rc=ZWRpaTU1ODM8M2ZlZDg6OEBpM3lqaHk5cjplNTMzbGkzNEAxMDJjMi4yXy4xMjIwLS0yYSNqZWhsMmRrby9hLS1kLWJzcw%3D%3D&btag=c0000e00030000&dy_q=1755308162&feature_id=fea919893f650a8c49286568590446ef&l=20250816093602F50CD29B5E9166D76423",
-                "videoList": []
-            },
-            "timestamp": 1755308162803
-        };
-
-        // 处理API响应
-        handleApiResponse(mockResponse);
-
-        // 实际项目中应该使用下面的代码调用真实API
-        /*
-        fetch(apiUrl)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('网络响应错误');
-                }
-                return response.json();
-            })
-            .then(data => {
-                handleApiResponse(data);
-            })
-            .catch(error => {
-                console.error('API请求失败:', error);
-                loadingState.classList.add('hidden');
-                errorMessage.textContent = '解析失败，请稍后重试';
-                errorState.classList.remove('hidden');
-            });
-        */
-    }, 2000); // 模拟2秒的网络延迟
+    // 使用真实API调用
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('网络响应错误');
+            }
+            return response.json();
+        })
+        .then(data => {
+            handleApiResponse(data);
+        })
+        .catch(error => {
+            console.error('API请求失败:', error);
+            loadingState.classList.add('hidden');
+            errorMessage.textContent = '解析失败，请稍后重试';
+            errorState.classList.remove('hidden');
+        });
 }
 
 // 处理API响应
