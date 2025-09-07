@@ -1,0 +1,12 @@
+{
+  "name": "download-video",
+  "version": "1.0.0",
+  "description": "一个简单、高效的视频去水印下载网站，支持解析抖音等平台的视频链接，提取无水印视频和封面。",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
